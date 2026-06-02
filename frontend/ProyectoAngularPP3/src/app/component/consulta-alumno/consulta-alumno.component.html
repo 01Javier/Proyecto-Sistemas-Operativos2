@@ -1,0 +1,44 @@
+<div class="container mt-4 mb-5">
+  <div class="card bg-dark text-white shadow-sm">
+    <div class="card-header border-0 text-center">
+      <h2 class="mb-0">Listado de Alumnos</h2>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-secondary text-center">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Grado</th>
+              <th>Sección</th>
+              <th>Edad</th>
+              <th>CUI</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let alumno of alumnos">
+              <td>{{ alumno.id }}</td>
+              <td>{{ alumno.nombre }}</td>
+              <td>{{ alumno.apellido }}</td>
+              <td>{{ alumno.email }}</td>
+              <td>{{ alumno.telefono }}</td>
+              <td>{{ alumno.grado }}</td>
+              <td>{{ alumno.seccion }}</td>
+              <td>{{ alumno.edad }}</td>
+              <td>{{ alumno.cui }}</td>
+              <td class="text-center">
+                <button (click)="selectEdit(alumno)"class="btn btn-warning btn-sm hover-outline-warning me-1">Editar</button>
+                <button (click)="deleteAlumno(alumno)"class="btn btn-danger btn-sm hover-outline-danger">Borrar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

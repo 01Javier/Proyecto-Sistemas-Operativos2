@@ -1,0 +1,56 @@
+<div class="container mt-4 mb-5">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white text-center">
+      <h2 class="mb-0">Agregar Usuario</h2>
+    </div>
+    <div class="card-body">
+      <form id="addUsuarioForm" class="needs-validation" novalidate>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input [(ngModel)]="user.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese el nombre" required>
+            <div class="invalid-feedback">Por favor, ingrese el nombre del usuario.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input [(ngModel)]="user.apellido" type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingrese el apellido" required>
+            <div class="invalid-feedback">Por favor, ingrese el apellido del usuario.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">Correo Electrónico:</label>
+            <input [(ngModel)]="user.email" type="email" name="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$">
+            <div class="invalid-feedback">Ingrese un correo electrónico válido.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="password" class="form-label">Contraseña:</label>
+            <div class="input-group">
+              <input [(ngModel)]="user.password" [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+                class="form-control" placeholder="Ingrese la contraseña" required minlength="6"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,100}$">
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()" tabindex="-1">
+                <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">Ingrese una contraseña de al menos 6 caracteres con letras, números y símbolos.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input [(ngModel)]="user.telefono" type="tel" name="telefono" id="telefono" class="form-control" placeholder="Ingrese el número de teléfono" required pattern="^[0-9]{8}$">
+            <div class="invalid-feedback">Ingrese un teléfono válido (exactamente 8 dígitos numéricos).</div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-center">
+          <button (click)="Save(user)" type="button" class="btn btn-success btn-sm me-2">Guardar</button>
+          <button (click)="Cancel()" type="button" class="btn btn-danger btn-sm">Cancelar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

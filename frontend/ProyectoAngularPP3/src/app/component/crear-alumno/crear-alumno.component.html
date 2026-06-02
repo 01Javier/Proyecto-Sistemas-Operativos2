@@ -1,0 +1,80 @@
+<div class="container mt-4 mb-5">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white text-center">
+      <h2 class="mb-0">Agregar Alumno</h2>
+    </div>
+    <div class="card-body">
+      <form id="addAlumnoForm" class="needs-validation" novalidate>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input [(ngModel)]="alumno.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese el nombre" required>
+            <div class="invalid-feedback">Por favor, ingrese el nombre del alumno.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input [(ngModel)]="alumno.apellido" type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingrese el apellido" required>
+            <div class="invalid-feedback">Por favor, ingrese el apellido del alumno.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">Correo Electrónico:</label>
+            <input [(ngModel)]="alumno.email" type="email" name="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$">
+            <div class="invalid-feedback">Ingrese un correo electrónico válido.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="password" class="form-label">Contraseña:</label>
+            <div class="input-group">
+              <input [(ngModel)]="alumno.password" [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+              class="form-control" placeholder="Ingrese la contraseña" required minlength="6" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,100}$">
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()" tabindex="-1">
+                <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">Ingrese una contraseña de al menos 6 caracteres.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input [(ngModel)]="alumno.telefono" type="tel" name="telefono" id="telefono" class="form-control" placeholder="Ingrese el número de teléfono" required pattern="^[0-9]{8}$">
+            <div class="invalid-feedback">Ingrese un teléfono válido (mínimo 8 dígitos numéricos).</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="grado" class="form-label">Grado:</label>
+            <input [(ngModel)]="alumno.grado" type="text" name="grado" id="grado" class="form-control" placeholder="Ej. Quinto primaria" required>
+            <div class="invalid-feedback">Ingrese un grado válido.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="seccion" class="form-label">Sección:</label>
+            <input [(ngModel)]="alumno.seccion" type="text" name="seccion" id="seccion" class="form-control" placeholder="Ejemplo: A, B, C" required pattern="^[A-Z\s]{1}$">
+            <div class="invalid-feedback">Ingrese una sección válida (una letra en mayúscula).</div>
+          </div>
+
+          <div class="col-md-2">
+            <label for="edad" class="form-label">Edad:</label>
+            <input [(ngModel)]="alumno.edad" type="number" name="edad" id="edad" class="form-control" placeholder="Edad" required min="6" max="17">
+            <div class="invalid-feedback">Ingrese una edad entre 6 y 17 años.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="cui" class="form-label">CUI:</label>
+            <input [(ngModel)]="alumno.cui" type="text" name="cui" id="cui" class="form-control" placeholder="Ingrese el CUI" required pattern="^[0-9]{13}$">
+            <div class="invalid-feedback">Ingrese un CUI válido (13 dígitos).</div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-center">
+          <button (click)="Save(alumno)" type="button" class="btn btn-success btn-sm hover-outline-warning me-1">Guardar</button>
+          <button (click)="Cancel()" type="button" class="btn btn-danger btn-sm hover-outline-danger">Cancelar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

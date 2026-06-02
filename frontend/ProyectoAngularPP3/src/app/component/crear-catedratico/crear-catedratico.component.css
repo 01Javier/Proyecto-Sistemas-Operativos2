@@ -1,0 +1,16 @@
+.hover-outline-warning:hover {
+  background-color: transparent !important;
+  color: green !important;
+  border: 1px solid green !important;
+}
+
+.hover-outline-danger:hover {
+  background-color: transparent !important;
+  color: #dc3545 !important;
+  border: 1px solid #dc3545 !important;
+}
+
+.card.shadow {
+  border: 1px solid black;
+  box-shadow: none !important;
+}

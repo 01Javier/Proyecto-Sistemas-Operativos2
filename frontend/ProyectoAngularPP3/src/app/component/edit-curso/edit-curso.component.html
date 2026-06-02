@@ -1,0 +1,49 @@
+<div class="container mt-4 mb-5">
+  <div class="card shadow col-md-8 mx-auto">
+    <div class="card-header bg-dark text-white text-center">
+      <h2 class="mb-0">Editar Curso</h2>
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate>
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label for="name" class="form-label">Nombre del Curso:</label>
+            <input [(ngModel)]="curso.name" name="name" id="name" type="text" class="form-control" placeholder="Nombre del curso" required />
+            <div class="invalid-feedback">Ingrese el nombre del curso.</div>
+          </div>
+
+          <div class="col-12">
+            <label for="catedratico" class="form-label">Catedrático:</label>
+            <select class="form-select" [(ngModel)]="curso.catedratico" name="catedratico" id="catedratico" required>
+              <option *ngFor="let c of catedraticos" [ngValue]="c">{{ c.nombre }} {{ c.apellido }}</option>
+            </select>
+            <div class="invalid-feedback">Seleccione un catedrático.</div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div *ngFor="let alumno of alumnosSeleccionados; let i = index" class="row mb-3">
+          <div class="col-md-9">
+            <label for="alumno_{{i}}" class="form-label">Alumno {{ i + 1 }}:</label>
+            <select class="form-select" [(ngModel)]="alumnosSeleccionados[i]" name="alumno_{{i}}" required>
+              <option *ngFor="let a of alumnos" [ngValue]="a">{{ a.nombre }} {{ a.apellido }}</option>
+            </select>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-outline-danger w-100" (click)="eliminarAlumno(i)">Eliminar</button>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <button type="button" class="btn btn-warning" (click)="agregarAlumno()">Agregar Alumno</button>
+        </div>
+
+        <div class="text-center">
+          <button type="button" class="btn btn-success btn-sm hover-outline-warning me-2" (click)="guardarCurso()">Guardar</button>
+          <button type="button" class="btn btn-danger btn-sm hover-outline-danger" (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

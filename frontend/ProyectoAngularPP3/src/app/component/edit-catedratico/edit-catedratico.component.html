@@ -1,0 +1,65 @@
+<div class="container mt-4 mb-5">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white text-center">
+      <h2 class="mb-0">Modificar Catedrático</h2>
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="id" class="form-label">ID del catedrático:</label>
+            <input [(ngModel)]="catedratico.id" type="text" name="id" id="id" class="form-control" disabled placeholder="ID" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input [(ngModel)]="catedratico.nombre" type="text" name="nombre" id="nombre" #myFocus class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input [(ngModel)]="catedratico.apellido" type="text" name="apellido" id="apellido" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">Correo Electrónico:</label>
+            <input [(ngModel)]="catedratico.email" type="email" name="email" id="email" class="form-control" required
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$">
+          </div>
+
+          <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input [(ngModel)]="catedratico.telefono" type="tel" name="telefono" id="telefono" class="form-control" required pattern="^[0-9]{8}$">
+          </div>
+
+          <div class="col-md-2">
+            <label for="edad" class="form-label">Edad:</label>
+            <input [(ngModel)]="catedratico.edad" type="number" name="edad" id="edad" class="form-control" required min="18" max="80">
+          </div>
+
+          <div class="col-md-4">
+            <label for="dpi" class="form-label">DPI:</label>
+            <input [(ngModel)]="catedratico.dpi" type="text" name="dpi" id="dpi" class="form-control" required pattern="^[0-9]{13}$">
+          </div>
+
+          <div class="col-md-6">
+            <label for="password" class="form-label">Contraseña:</label>
+            <div class="input-group">
+              <input [(ngModel)]="catedratico.password" [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+                class="form-control" required minlength="6"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,100}$">
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()" tabindex="-1">
+                <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-center">
+          <button (click)="editCatedratico(catedratico)" type="button" class="btn btn-success btn-sm hover-outline-warning me-1">Guardar</button>
+          <button (click)="Cancel()" type="button" class="btn btn-danger btn-sm hover-outline-danger">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

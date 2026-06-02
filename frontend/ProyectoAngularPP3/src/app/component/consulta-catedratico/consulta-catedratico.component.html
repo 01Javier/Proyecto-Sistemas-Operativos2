@@ -1,0 +1,40 @@
+<div class="container mt-4 mb-5">
+  <div class="card bg-dark text-white shadow-sm">
+    <div class="card-header border-0 text-center">
+      <h2 class="mb-0">Listado de Catedráticos</h2>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-secondary text-center">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Edad</th>
+              <th>DPI</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let catedratico of catedraticos">
+              <td>{{ catedratico.id }}</td>
+              <td>{{ catedratico.nombre }}</td>
+              <td>{{ catedratico.apellido }}</td>
+              <td>{{ catedratico.email }}</td>
+              <td>{{ catedratico.telefono }}</td>
+              <td>{{ catedratico.edad }}</td>
+              <td>{{ catedratico.dpi }}</td>
+              <td class="text-center">
+                <button (click)="selectEdit(catedratico)" class="btn btn-warning btn-sm hover-outline-warning me-1">Editar</button>
+                <button (click)="deleteCatedratico(catedratico)" class="btn btn-danger btn-sm hover-outline-danger">Borrar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

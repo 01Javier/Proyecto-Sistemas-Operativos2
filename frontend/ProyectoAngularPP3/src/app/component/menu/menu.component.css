@@ -1,0 +1,9 @@
+.navbar .dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+}
+
+body {
+  overflow-y: scroll;
+}
+
