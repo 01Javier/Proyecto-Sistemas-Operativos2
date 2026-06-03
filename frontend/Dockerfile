@@ -2,7 +2,7 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 
-COPY . .
+COPY ProyectoAngularPP3/ .
 
 RUN npm install
 

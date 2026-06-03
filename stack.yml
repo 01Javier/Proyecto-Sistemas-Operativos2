@@ -31,7 +31,7 @@ services:
 
   # FRONTEND (Angular) – 2 réplicas balanceadas
   frontend:
-    image: tuusuario/angularpp3:1.0   # <─ cambiar por tu imagen en Docker Hub
+    image: javil1/frontend-siso2:1.0  
     networks:
       - appnet
     deploy:
@@ -50,7 +50,7 @@ services:
 
   # BACKEND (Spring Boot) – 2 réplicas balanceadas
   backend:
-    image: tuusuario/alm09:1.0        
+    image: javil1/backend-siso2:1.0        
     environment:
       SPRING_PROFILES_ACTIVE: postgresql
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jvmc_project_9
