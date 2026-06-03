@@ -4,14 +4,10 @@ services:
 
   postgres:
     image: postgres:17-alpine
-
     environment:
       POSTGRES_DB: jvmc_project_9
       POSTGRES_USER: usrmvc
       POSTGRES_PASSWORD: Admin$2025
-
-    ports:
-      - "5432:5432"
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -22,15 +18,22 @@ services:
     depends_on:
       - postgres
 
-    ports:
-      - "9090:9090"
+    expose:
+      - "9090"
 
   frontend:
     build: ./Frontend
 
+    expose:
+      - "80"
+
+  nginx:
+    build: ./nginx
+    depends_on:
+      - frontend
+      - backend
     ports:
-      - "4200:80"
+      - "80:80"
 
 volumes:
   postgres_data:
-
