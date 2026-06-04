@@ -151,7 +151,7 @@ configs:
   nginx_config:
     file: ./nginx/nginx.conf
   prometheus_config:
-    file: ./monitoring/prometheus.yml
+    file: ./prometheus/prometheus.yml
 
 volumes:
   postgres_data:
