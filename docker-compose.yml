@@ -13,7 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build: ./Backend
+    build: ./backend
 
     depends_on:
       - postgres
@@ -22,7 +22,7 @@ services:
       - "9090"
 
   frontend:
-    build: ./Frontend
+    build: ./frontend
 
     expose:
       - "80"
