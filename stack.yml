@@ -59,12 +59,6 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:9090/"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
 
   # BASE DE DATOS (PostgreSQL)
   postgres:
