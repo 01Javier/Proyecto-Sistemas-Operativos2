@@ -40,7 +40,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 100s
+      start_period: 40s
 
   # BACKEND (Spring Boot) – 2 réplicas balanceadas
   backend:
@@ -60,11 +60,11 @@ services:
       restart_policy:
         condition: on-failure
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:9090/users"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:9090/"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 100s
+      start_period: 40s
 
   # BASE DE DATOS (PostgreSQL)
   postgres:
