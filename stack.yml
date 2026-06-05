@@ -35,6 +35,12 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 100s
 
   # BACKEND (Spring Boot) – 2 réplicas balanceadas
   backend:
@@ -53,6 +59,12 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9090/users"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 100s
 
   # BASE DE DATOS (PostgreSQL)
   postgres:
@@ -72,6 +84,11 @@ services:
           - node.role == manager    # BD solo en manager para persistencia
       restart_policy:
         condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usrmvc -d jvmc_project_9"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   # MONITOREO – Prometheus (recolector de métricas)
   prometheus:
