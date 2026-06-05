@@ -31,19 +31,20 @@ Prometheus + cAdvisor + Grafana monitorean los contenedores.
 
 ```mermaid
 flowchart TD
-    U[Usuario / Navegador] --> N[Nginx Load Balancer :80]
+    U["Usuario / Navegador"] --> N["Nginx Load Balancer :80"]
 
-    N --> F1[Frontend Angular Replica 1]
-    N --> F2[Frontend Angular Replica 2]
+    N --> F1["Frontend Angular Réplica 1"]
+    N --> F2["Frontend Angular Réplica 2"]
 
-    N -->|/api| B1[Backend Spring Boot Replica 1]
-    N -->|/api| B2[Backend Spring Boot Replica 2]
+    N -->|"Rutas /api/"| B1["Backend Spring Boot Réplica 1"]
+    N -->|"Rutas /api/"| B2["Backend Spring Boot Réplica 2"]
 
-    B1 --> DB[(PostgreSQL)]
+    B1 --> DB[("PostgreSQL")]
     B2 --> DB
 
-    C[cAdvisor] --> P[Prometheus]
-    P --> G[Grafana]
+    C["cAdvisor"] --> P["Prometheus"]
+    P --> G["Grafana"]
+```
 
 ## Requisitos
 - Docker Desktop
