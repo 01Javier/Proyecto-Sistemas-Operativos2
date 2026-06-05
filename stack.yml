@@ -22,12 +22,6 @@ services:
       placement:
         constraints:
           - node.role == manager
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
 
   # FRONTEND (Angular) – 2 réplicas balanceadas
   frontend:
@@ -41,12 +35,6 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 15s
 
   # BACKEND (Spring Boot) – 2 réplicas balanceadas
   backend:
@@ -65,12 +53,6 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:9090/actuator/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s    # Spring Boot tarda en arrancar
 
   # BASE DE DATOS (PostgreSQL)
   postgres:
@@ -90,12 +72,6 @@ services:
           - node.role == manager    # BD solo en manager para persistencia
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U usrmvc -d jvmc_project_9"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   # MONITOREO – Prometheus (recolector de métricas)
   prometheus:
