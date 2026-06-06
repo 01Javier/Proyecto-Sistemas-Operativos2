@@ -2,7 +2,6 @@ version: '3.9'
 
 services:
 
-  # BALANCEADOR DE CARGA (Nginx) – punto de entrada único
   nginx:
     image: nginx:1.29-alpine
     ports:
@@ -23,13 +22,13 @@ services:
         constraints:
           - node.role == manager
 
-  # FRONTEND (Angular) – 2 réplicas balanceadas
   frontend:
-    image: javil1/frontend-siso2:1.0  
+    image: javil1/frontend-siso2:1.0
     networks:
       - appnet
     deploy:
       replicas: 2
+      endpoint_mode: dnsrr
       update_config:
         parallelism: 1
         delay: 10s
@@ -42,9 +41,8 @@ services:
       retries: 5
       start_period: 40s
 
-  # BACKEND (Spring Boot) – 2 réplicas balanceadas
   backend:
-    image: javil1/backend-siso2:1.0        
+    image: javil1/backend-siso2:1.0
     environment:
       SPRING_PROFILES_ACTIVE: postgresql
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jvmc_project_9
@@ -54,13 +52,13 @@ services:
       - appnet
     deploy:
       replicas: 2
+      endpoint_mode: dnsrr
       update_config:
         parallelism: 1
         delay: 10s
       restart_policy:
         condition: on-failure
 
-  # BASE DE DATOS (PostgreSQL)
   postgres:
     image: postgres:17-alpine
     environment:
@@ -75,7 +73,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.role == manager    # BD solo en manager para persistencia
+          - node.role == manager
       restart_policy:
         condition: on-failure
     healthcheck:
@@ -84,7 +82,6 @@ services:
       timeout: 10s
       retries: 5
 
-  # MONITOREO – Prometheus (recolector de métricas)
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -100,7 +97,6 @@ services:
         constraints:
           - node.role == manager
 
-  # MONITOREO – Grafana (dashboards visuales)
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -118,7 +114,6 @@ services:
         constraints:
           - node.role == manager
 
-  # MONITOREO – cAdvisor (métricas de contenedores)
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     volumes:
@@ -129,11 +124,10 @@ services:
     networks:
       - appnet
     deploy:
-      mode: global           # Un cAdvisor por cada nodo del Swarm
+      mode: global
       restart_policy:
         condition: on-failure
 
-# CONFIGS (Docker Swarm configs para archivos de configuración)
 configs:
   nginx_config:
     file: ./nginx/nginx.conf
