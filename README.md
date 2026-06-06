@@ -16,6 +16,14 @@ Aplicación web de gestión académica desplegada bajo arquitectura de microserv
 - cAdvisor
 - Docker Hub
 
+## Estructura del proyecto
+- frontend/: aplicación Angular.
+- backend/: API REST Spring Boot.
+- nginx/: configuración del balanceador de carga.
+- prometheus/: configuración de monitoreo.
+- stack.yml: definición del stack para Docker Swarm.
+-
+
 ## Arquitectura
 - **Nginx**: balanceador de carga y punto de entrada único de la aplicación.
 - **Frontend**: Angular servido con Nginx, 2 réplicas.
@@ -46,13 +54,13 @@ Prometheus + cAdvisor + Grafana monitorean los contenedores.
 flowchart TD
     U["Usuario / Navegador"] --> N["Nginx Load Balancer :80"]
 
-    N --> F1["Frontend Angular Réplica 1"]
-    N --> F2["Frontend Angular Réplica 2"]
+    N --> F1["Frontend Angular Replica 1"]
+    N --> F2["Frontend Angular Replica 2"]
 
-    N -->|"Rutas /api/"| B1["Backend Spring Boot Réplica 1"]
-    N -->|"Rutas /api/"| B2["Backend Spring Boot Réplica 2"]
+    N -->|Rutas api| B1["Backend Spring Boot Replica 1"]
+    N -->|Rutas api| B2["Backend Spring Boot Replica 2"]
 
-    B1 --> DB[("PostgreSQL")]
+    B1 --> DB[(PostgreSQL)]
     B2 --> DB
 
     C["cAdvisor"] --> P["Prometheus"]
@@ -162,12 +170,6 @@ Usuario: admin
 Contraseña: admin123
 ```
 
-La contraseña se define en el archivo `stack.yml` mediante la variable:
-
-```yaml
-GF_SECURITY_ADMIN_PASSWORD: admin123
-```
-
 ## Acceso a cAdvisor
 cAdvisor se ejecuta dentro del stack para exponer métricas de los contenedores hacia Prometheus.
 
@@ -228,3 +230,8 @@ GET /api/users HTTP/1.1 status=200 upstream=10.0.1.10:9090
 ```
 
 Las diferentes IPs en `upstream` demuestran que Nginx distribuye las peticiones entre distintas réplicas del backend.
+
+## Detener el stack
+
+```bash
+docker stack rm proyecto
