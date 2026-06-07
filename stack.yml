@@ -23,7 +23,7 @@ services:
           - node.role == manager
 
   frontend:
-    image: javil1/frontend-siso2:1.0
+    image: javil1/frontend-siso2:2.0
     networks:
       - appnet
     deploy:
@@ -42,7 +42,7 @@ services:
       start_period: 40s
 
   backend:
-    image: javil1/backend-siso2:1.0
+    image: javil1/backend-siso2:2.0
     environment:
       SPRING_PROFILES_ACTIVE: postgresql
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jvmc_project_9

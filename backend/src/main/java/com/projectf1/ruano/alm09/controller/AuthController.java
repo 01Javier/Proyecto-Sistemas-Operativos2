@@ -12,8 +12,10 @@ import com.projectf1.ruano.alm09.dto.LoginRequest;
 import com.projectf1.ruano.alm09.dto.LoginResponse;
 import com.projectf1.ruano.alm09.model.entity.Alumno;
 import com.projectf1.ruano.alm09.model.entity.Catedratico;
+import com.projectf1.ruano.alm09.model.entity.User;
 import com.projectf1.ruano.alm09.model.repository.AlumnoRepository;
 import com.projectf1.ruano.alm09.model.repository.CatedraticoRepository;
+import com.projectf1.ruano.alm09.model.repository.UserRepository;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:9090", "http://localhost:4200"})
@@ -24,16 +26,27 @@ public class AuthController {
 
     private final AlumnoRepository alumnoRepository;
     private final CatedraticoRepository catedraticoRepository;
+    private final UserRepository userRepository;
 
-    public AuthController(AlumnoRepository alumnoRepository, CatedraticoRepository catedraticoRepository) {
+    public AuthController(AlumnoRepository alumnoRepository,
+                          CatedraticoRepository catedraticoRepository,
+                          UserRepository userRepository) {
         this.alumnoRepository = alumnoRepository;
         this.catedraticoRepository = catedraticoRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         if (ADMIN_EMAIL.equals(request.getEmail()) && ADMIN_PASSWORD.equals(request.getPassword())) {
             return ResponseEntity.ok(new LoginResponse("ADMIN", null, "Administrador", "General", ADMIN_EMAIL));
+        }
+
+        Optional<User> userOpt = userRepository.findByEmailAndPassword(
+                request.getEmail(), request.getPassword());
+        if (userOpt.isPresent() && "ADMIN".equals(userOpt.get().getRole())) {
+            User u = userOpt.get();
+            return ResponseEntity.ok(new LoginResponse("ADMIN", u.getId(), u.getNombre(), u.getApellido(), u.getEmail()));
         }
 
         Optional<Catedratico> catedratico = catedraticoRepository.findByEmailAndPassword(
