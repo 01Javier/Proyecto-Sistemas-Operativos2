@@ -20,6 +20,7 @@ import { InicioComponent } from './component/inicio/inicio.component';
 import { LoginComponent } from './component/login/login.component';
 import { MiCursoCatedraticoComponent } from './component/mi-curso-catedratico/mi-curso-catedratico.component';
 import { MiCursoAlumnoComponent } from './component/mi-curso-alumno/mi-curso-alumno.component';
+import { RegistroComponent } from './component/registro/registro.component';
 import { AlumnoService } from './service/alumno.service';
 import { CatedraticoService } from './service/catedratico.service';
 import { CursoService } from './service/curso.service';
@@ -49,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     MiCursoCatedraticoComponent,
     MiCursoAlumnoComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,

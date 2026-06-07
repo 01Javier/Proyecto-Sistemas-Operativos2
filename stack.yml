@@ -23,7 +23,7 @@ services:
           - node.role == manager
 
   frontend:
-    image: javil1/frontend-siso2:1.0
+    image: javil1/frontend-siso2:2.0
     networks:
       - appnet
     deploy:

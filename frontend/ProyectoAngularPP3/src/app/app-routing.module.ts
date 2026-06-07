@@ -17,11 +17,13 @@ import { InicioComponent } from './component/inicio/inicio.component';
 import { LoginComponent } from './component/login/login.component';
 import { MiCursoCatedraticoComponent } from './component/mi-curso-catedratico/mi-curso-catedratico.component';
 import { MiCursoAlumnoComponent } from './component/mi-curso-alumno/mi-curso-alumno.component';
+import { RegistroComponent } from './component/registro/registro.component';
 import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
 
   { path: 'menu', component: MenuComponent, canActivate: [authGuard] },
 
