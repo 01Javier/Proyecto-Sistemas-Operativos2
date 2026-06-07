@@ -7,6 +7,7 @@ import { Catedratico } from '../../entity/catedratico';
 import { CatedraticoService } from '../../service/catedratico.service';
 import { Alumno } from '../../entity/alumno';
 import { AlumnoService } from '../../service/alumno.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-edit-curso',
@@ -24,6 +25,7 @@ export class EditCursoComponent implements OnInit {
     private cursoService: CursoService,
     private alumnoService: AlumnoService,
     private catedraticoService: CatedraticoService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -100,7 +102,7 @@ export class EditCursoComponent implements OnInit {
   if (id) {
     this.cursoService.editCurso(id, this.curso).subscribe(() => {
       alert('Curso actualizado correctamente');
-      this.router.navigate(['cursos']);
+      this.navegar();
     });
   } else {
     alert('Error: no se pudo obtener el ID del curso.');
@@ -108,6 +110,14 @@ export class EditCursoComponent implements OnInit {
 }
 
   cancelar() {
-    this.router.navigate(['cursos']);
+    this.navegar();
+  }
+
+  private navegar(): void {
+    if (this.authService.getRole() === 'CATEDRATICO') {
+      this.router.navigate(['/mi-curso']);
+    } else {
+      this.router.navigate(['/cursos']);
+    }
   }
 }

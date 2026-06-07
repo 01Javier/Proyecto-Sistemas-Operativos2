@@ -56,6 +56,18 @@ public class CursoController {
     }
 
     // -----------------------------------------------------
+    @GetMapping("curso/catedratico/{id}")
+    public List<Curso> getCursosByCatedratico(@PathVariable Long id) {
+        return cursoService.getCursosByCatedratico(id);
+    }
+
+    // -----------------------------------------------------
+    @GetMapping("curso/alumno/{id}")
+    public List<Curso> getCursosByAlumno(@PathVariable Long id) {
+        return cursoService.getCursosByAlumno(id);
+    }
+
+    // -----------------------------------------------------
     @DeleteMapping("delete_curso/{id}")
     public String deleteCurso(@PathVariable Long id) {
         return cursoService.getCursoById(id).map(curso -> {

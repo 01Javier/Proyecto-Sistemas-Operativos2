@@ -1,0 +1,50 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100">
+  <div class="card bg-dark text-white shadow-lg login-card">
+    <div class="card-body p-5">
+      <div class="text-center mb-4">
+        <img src="assets/images/logoumg2.png" alt="UMG Logo" width="80" class="mb-3">
+        <h2 class="fw-bold">Iniciar Sesión</h2>
+        <p class="text-secondary small">Sistema de Gestión Académica</p>
+      </div>
+
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <div class="mb-3">
+          <label for="email" class="form-label text-secondary">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control bg-secondary text-white border-0"
+            placeholder="usuario@correo.com"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label text-secondary">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control bg-secondary text-white border-0"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger py-2 small">{{ error }}</div>
+
+        <button
+          type="submit"
+          class="btn btn-primary w-100 py-2 fw-semibold"
+          [disabled]="loading || !email || !password"
+        >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          {{ loading ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

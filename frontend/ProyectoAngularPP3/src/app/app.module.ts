@@ -16,11 +16,15 @@ import { CrearUsuarioComponent } from './component/crear-usuario/crear-usuario.c
 import { CrearAlumnoComponent } from './component/crear-alumno/crear-alumno.component';
 import { CrearCatedraticoComponent } from './component/crear-catedratico/crear-catedratico.component';
 import { CrearCursoComponent } from './component/crear-curso/crear-curso.component';
+import { InicioComponent } from './component/inicio/inicio.component';
+import { LoginComponent } from './component/login/login.component';
+import { MiCursoCatedraticoComponent } from './component/mi-curso-catedratico/mi-curso-catedratico.component';
+import { MiCursoAlumnoComponent } from './component/mi-curso-alumno/mi-curso-alumno.component';
 import { AlumnoService } from './service/alumno.service';
 import { CatedraticoService } from './service/catedratico.service';
 import { CursoService } from './service/curso.service';
 import { UsuarioService } from './service/usuario.service';
-import { InicioComponent } from './component/inicio/inicio.component';
+import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -42,6 +46,9 @@ import { FormsModule } from '@angular/forms';
     CrearCatedraticoComponent,
     CrearCursoComponent,
     InicioComponent,
+    LoginComponent,
+    MiCursoCatedraticoComponent,
+    MiCursoAlumnoComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AlumnoService ,CatedraticoService, CursoService, UsuarioService],
+  providers: [AlumnoService, CatedraticoService, CursoService, UsuarioService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,72 +14,39 @@ import { CrearAlumnoComponent } from './component/crear-alumno/crear-alumno.comp
 import { CrearCatedraticoComponent } from './component/crear-catedratico/crear-catedratico.component';
 import { CrearCursoComponent } from './component/crear-curso/crear-curso.component';
 import { InicioComponent } from './component/inicio/inicio.component';
+import { LoginComponent } from './component/login/login.component';
+import { MiCursoCatedraticoComponent } from './component/mi-curso-catedratico/mi-curso-catedratico.component';
+import { MiCursoAlumnoComponent } from './component/mi-curso-alumno/mi-curso-alumno.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
 
-    {
-      path: 'menu', component: MenuComponent
-    },
+  { path: 'login', component: LoginComponent },
 
-    {
-      path: "alumnos", component: ConsultaAlumnoComponent
-    },
+  { path: 'menu', component: MenuComponent, canActivate: [authGuard] },
 
-    {
-      path: 'catedraticos', component: ConsultaCatedraticoComponent
-    },
+  { path: 'inicio', component: InicioComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
 
-    {
-      path: 'usuarios', component: ConsultaUsuarioComponent
-    },
+  { path: 'alumnos', component: ConsultaAlumnoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'catedraticos', component: ConsultaCatedraticoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'usuarios', component: ConsultaUsuarioComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'cursos', component: ConsultaCursoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
 
-    {
-      path: 'cursos', component: ConsultaCursoComponent
-    },
+  { path: 'crearAlumno', component: CrearAlumnoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'crearCatedratico', component: CrearCatedraticoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'crearCurso', component: CrearCursoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'crearUsuario', component: CrearUsuarioComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
 
-    {
-      path: 'crearAlumno', component: CrearAlumnoComponent
-    },
+  { path: 'editAlumno', component: EditAlumnoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'editCatedratico', component: EditCatedraticoComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+  { path: 'editCurso', component: EditCursoComponent, canActivate: [authGuard], data: { roles: ['ADMIN', 'CATEDRATICO'] } },
+  { path: 'editUsuario', component: EditUsuarioComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
 
-    {
-      path: 'crearCatedratico', component: CrearCatedraticoComponent
-    },
+  { path: 'mi-curso', component: MiCursoCatedraticoComponent, canActivate: [authGuard], data: { roles: ['CATEDRATICO'] } },
+  { path: 'mi-curso-alumno', component: MiCursoAlumnoComponent, canActivate: [authGuard], data: { roles: ['ALUMNO'] } },
 
-    {
-      path: 'crearCurso', component: CrearCursoComponent
-    },
-
-    {
-      path: 'crearUsuario', component: CrearUsuarioComponent
-    },
-
-    {
-      path: 'editAlumno', component: EditAlumnoComponent
-    },
-
-    {
-      path: 'editCatedratico', component: EditCatedraticoComponent
-    },
-
-    {
-      path: 'editCurso', component: EditCursoComponent
-    },
-
-    {
-      path: 'editUsuario', component: EditUsuarioComponent
-    },
-
-    {
-      path: "inicio", component: InicioComponent
-    },
-
-    {
-      path: "" , redirectTo: "inicio", pathMatch : "full"
-    },
-
-    {
-      path:"**" , redirectTo: "inicio", pathMatch : "full"
-    }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];
 

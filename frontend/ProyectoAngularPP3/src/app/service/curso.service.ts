@@ -30,4 +30,12 @@ export class CursoService {
       responseType: 'text',
     });
   }
+
+  getCursosByCatedratico(catedraticoId: number) {
+    return this.http.get<Curso[]>(`${this.Url}/curso/catedratico/${catedraticoId}`);
+  }
+
+  getCursosByAlumno(alumnoId: number) {
+    return this.http.get<Curso[]>(`${this.Url}/curso/alumno/${alumnoId}`);
+  }
 }
