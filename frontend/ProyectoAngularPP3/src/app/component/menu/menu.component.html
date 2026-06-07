@@ -1,50 +1,69 @@
-<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-  <div class="container-fluid position-relative">
+<nav *ngIf="authService.isLoggedIn()" class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+    <!-- Izquierda: toggle + brand -->
     <div class="d-flex align-items-center">
       <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand mb-0" routerLink="/principal">Inicio</a>
+      <a class="navbar-brand mb-0" routerLink="/inicio">Inicio</a>
     </div>
 
+    <!-- Centro: items de navegación -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-3 d-flex flex-row">
-        <li class="nav-item dropdown me-3">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
-            <li><a class="dropdown-item" routerLink="/usuarios">Consultar</a></li>
-            <li><a class="dropdown-item" routerLink="/crearUsuario">Crear</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown me-3">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAlumnos" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">Alumnos</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownAlumnos">
-            <li><a class="dropdown-item" routerLink="/alumnos">Consultar</a></li>
-            <li><a class="dropdown-item" routerLink="/crearAlumno">Crear</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown me-3">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCatedraticos" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">Catedráticos</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatedraticos">
-            <li><a class="dropdown-item" routerLink="/catedraticos">Consultar</a></li>
-            <li><a class="dropdown-item" routerLink="/crearCatedratico">Crear</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown me-3">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCursos" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">Cursos</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownCursos">
-            <li><a class="dropdown-item" routerLink="/cursos">Consultar</a></li>
-            <li><a class="dropdown-item" routerLink="/crearCurso">Crear</a></li>
-          </ul>
-        </li>
+
+        <ng-container *ngIf="role === 'ADMIN'">
+          <li class="nav-item dropdown me-3">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Usuarios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/usuarios">Consultar</a></li>
+              <li><a class="dropdown-item" routerLink="/crearUsuario">Crear</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown me-3">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Alumnos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/alumnos">Consultar</a></li>
+              <li><a class="dropdown-item" routerLink="/crearAlumno">Crear</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown me-3">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Catedráticos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/catedraticos">Consultar</a></li>
+              <li><a class="dropdown-item" routerLink="/crearCatedratico">Crear</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown me-3">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Cursos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/cursos">Consultar</a></li>
+              <li><a class="dropdown-item" routerLink="/crearCurso">Crear</a></li>
+            </ul>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'CATEDRATICO'">
+          <li class="nav-item me-3">
+            <a class="nav-link" routerLink="/mi-curso">Mi Curso</a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'ALUMNO'">
+          <li class="nav-item me-3">
+            <a class="nav-link" routerLink="/mi-curso-alumno">Mi Curso</a>
+          </li>
+        </ng-container>
+
       </ul>
     </div>
-    <img src="assets/images/logoumg2.png" alt="UMG Logo" width="50" height="50"
-         class="position-absolute end-0 top-50 translate-middle-y me-3">
+
+    <!-- Derecha: usuario + logout + logo (todo en flujo normal, sin absolute) -->
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-light small d-none d-md-inline">{{ nombre }}</span>
+      <button class="btn btn-outline-light btn-sm" (click)="logout()">Cerrar Sesión</button>
+      <img src="assets/images/logoumg2.png" alt="UMG Logo" width="45" height="45">
+    </div>
   </div>
 </nav>

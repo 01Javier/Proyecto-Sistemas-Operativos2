@@ -1,0 +1,18 @@
+.login-wrapper {
+  background: #1a1a2e;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.form-control::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.35);
+}

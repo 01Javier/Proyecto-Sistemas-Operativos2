@@ -32,4 +32,12 @@ public class CursoService {
     public void deleteCurso(Curso curso) {
         cursoRepository.delete(curso);
     }
+
+    public List<Curso> getCursosByCatedratico(Long catedraticoId) {
+        return cursoRepository.findByCatedraticoId(catedraticoId);
+    }
+
+    public List<Curso> getCursosByAlumno(Long alumnoId) {
+        return cursoRepository.findByAlumnosId(alumnoId);
+    }
 }
