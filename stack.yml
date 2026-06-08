@@ -6,9 +6,12 @@ services:
     image: nginx:1.29-alpine
     ports:
       - "80:80"
+      - "443:443"
     configs:
       - source: nginx_config
         target: /etc/nginx/nginx.conf
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
       - appnet
     depends_on:

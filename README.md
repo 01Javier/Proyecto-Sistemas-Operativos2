@@ -208,6 +208,14 @@ Abrir en navegador:
 http://127.0.0.1/login
 ```
 
+## Acceso a la aplicación
+
+La aplicación está disponible mediante HTTPS en:
+
+```txt
+https://proyectosiso2.ddns.net
+```
+
 ## Prueba de balanceo de carga
 
 Para verificar el balanceo se enviaron varias peticiones al backend:
