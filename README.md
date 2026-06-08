@@ -216,6 +216,12 @@ La aplicación está disponible mediante HTTPS en:
 https://proyectosiso2.ddns.net
 ```
 
+usuario admin para acceder
+```txt
+corre: admin@admin.com
+contraseña: Admin123*
+```
+
 ## Prueba de balanceo de carga
 
 Para verificar el balanceo se enviaron varias peticiones al backend:
