@@ -205,7 +205,7 @@ Respuesta JSON con status 200
 Abrir en navegador:
 
 ```txt
-http://127.0.0.1/inicio
+http://127.0.0.1/login
 ```
 
 ## Prueba de balanceo de carga
